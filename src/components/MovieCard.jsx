@@ -3,7 +3,6 @@ import React from 'react'
 import { COLORS } from '../theme/colors'
 
 const MovieCard = ({ item, onSelectMovie }) => {
-    // console.log(item.backdrop_path);
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={() => { onSelectMovie(item) }}>
@@ -19,7 +18,7 @@ export default MovieCard
 const styles = StyleSheet.create({
     container: {
         width: '48%',
-        backgroundColor: COLORS.secondary,
+        backgroundColor: COLORS.primary,
         margin: '1%',
         borderRadius: 10,
         padding: 5,

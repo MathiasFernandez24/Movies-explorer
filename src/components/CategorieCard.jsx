@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { COLORS } from '../theme/colors'
 
@@ -7,7 +7,7 @@ const CategorieCard = ({ title, onSelectCategorie }) => {
 
     return (
         <TouchableOpacity style={styles.container} onPress={() => onSelectCategorie(title)}>
-            <Text>{title}</Text>
+            <Text style={styles.text}>{title}</Text>
         </TouchableOpacity>
     )
 }
@@ -16,9 +16,11 @@ export default CategorieCard
 
 const styles = StyleSheet.create({
     container: {
-        margin: 5,
+        flex: 1,
+        margin: 8,
+        marginHorizontal: 16,
         padding: 10,
-        backgroundColor: COLORS.tertiary,
+        backgroundColor: COLORS.primary,
         borderRadius: 5,
         shadowColor: "#000",
         shadowOffset: {
@@ -30,4 +32,7 @@ const styles = StyleSheet.create({
 
         elevation: 4,
     },
+    text: {
+        fontSize: 25,
+    }
 })

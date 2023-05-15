@@ -1,5 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useState } from "react"
 
 
@@ -35,7 +34,6 @@ export const useMoviesNowPlaying = () => {
     return { list }
 }
 
-
 export const useMoviesPopular = () => {
     const [list, setList] = useState([])
     useEffect(() => {
@@ -60,16 +58,69 @@ export const useMoviesPopular = () => {
     return { list }
 }
 
+export const useMoviesUpcoming = () => {
+    const [list, setList] = useState([])
+    useEffect(() => {
+        fetch('https://api.themoviedb.org/3/movie/upcoming?language=es-ES&page=1', options)
+            .then(response => response.json())
+            .then(response => {
+                const results = response.results.map((i) => {
+                    return {
+                        id: i.id,
+                        title: i.title,
+                        description: i.overview,
+                        poster_path: "https://image.tmdb.org/t/p/w500" + i.poster_path,
+                        backdrop_path: "https://image.tmdb.org/t/p/w500" + i.backdrop_path
+                    }
+                })
+                setList(results)
+            })
+            .catch(err => console.error(err))
+    }, [])
 
+    return { list }
+}
 
+export const useMoviesTopRated = () => {
+    const [list, setList] = useState([])
+    useEffect(() => {
+        fetch('https://api.themoviedb.org/3/movie/top_rated?language=es-ES&page=1', options)
+            .then(response => response.json())
+            .then(response => {
+                const results = response.results.map((i) => {
+                    return {
+                        id: i.id,
+                        title: i.title,
+                        description: i.overview,
+                        poster_path: "https://image.tmdb.org/t/p/w500" + i.poster_path,
+                        backdrop_path: "https://image.tmdb.org/t/p/w500" + i.backdrop_path
+                    }
+                })
+                setList(results)
+            })
+            .catch(err => console.error(err))
+    }, [])
 
+    return { list }
+}
 
+export const useMovieDetail = (movieId) => {
+    const [detail, setDetail] = useState([])
+    useEffect(() => {
+        fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=es-ES`, options)
+            .then(response => response.json())
+            .then(response => {
+                const { genres, spoken_languages, tagline, release_date } = response
+                const results = {
+                    genres: genres,
+                    spokenLanguages: spoken_languages,
+                    tagline: tagline,
+                    releaseDate: release_date,
+                }
+                setDetail(results)
+            })
+            .catch(err => console.error(err));
+    }, [])
 
-
-// <View style={styles.container}>
-//     <Text>MovieNavigator</Text>
-//     <FlatList
-//         data={list}
-//         renderItem={(i) => <Text>{i.item.title}</Text>}
-//     />
-// </View>
+    return { detail }
+}

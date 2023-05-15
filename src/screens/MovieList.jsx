@@ -1,7 +1,8 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
+import { FlatList, StyleSheet, View } from 'react-native'
+import React from 'react'
 import MovieCard from '../components/MovieCard'
-import { useMoviesNowPlaying, useMoviesPopular } from '../service/API'
+import { useMoviesNowPlaying, useMoviesPopular, useMoviesTopRated, useMoviesUpcoming } from '../service/API'
+import { COLORS } from '../theme/colors'
 
 const MovieList = ({ navigation, route }) => {
     const { title } = route.params
@@ -10,6 +11,10 @@ const MovieList = ({ navigation, route }) => {
         case "En cartelera": var { list } = useMoviesNowPlaying()
             break;
         case "Populares": var { list } = useMoviesPopular()
+            break;
+        case "Proximamente": var { list } = useMoviesUpcoming()
+            break;
+        case "Mejor Valoradas": var { list } = useMoviesTopRated()
             break;
         default: console.log("opcion inexistente");
             break;
@@ -36,4 +41,9 @@ const MovieList = ({ navigation, route }) => {
 
 export default MovieList
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: COLORS.secondary
+    }
+})
