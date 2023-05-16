@@ -1,22 +1,15 @@
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { COLORS } from '../theme/colors'
-import { useMovieDetail } from '../service/API';
+import { COLORS } from '../../theme/colors';
+import { useMovieDetail } from '../../service/API';
 
-const options = {
-    method: 'GET',
-    headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkYjE3NTUzZTliMDAyZjYwZjI0NWM3YWIxMDJkNzg5OCIsInN1YiI6IjY0NWQzN2RlZmUwNzdhNWNhYWUxNjA4YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.h8PYyq0yY_bmmP-P-8XSDXpXd1p2Z8VZLuoc0g1h2SE'
-    }
-};
 
 const MovieDetail = ({ route }) => {
     const { item } = route.params
 
     const { detail } = useMovieDetail(item.id)
-    console.log("----------------------");
-    console.log(detail);
+    // console.log("----------------------");
+    // console.log(detail);
 
     return (
         <ScrollView style={styles.containerScroll}>
@@ -56,8 +49,8 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
     },
     title: {
-        alignSelf: 'center',
-        fontSize: 28,
+        // alignSelf: 'center',
+        fontSize: 18,
         fontWeight: 'bold',
 
     },

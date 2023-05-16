@@ -1,8 +1,8 @@
 import { FlatList, StyleSheet, View } from 'react-native'
 import React from 'react'
-import MovieCard from '../components/MovieCard'
-import { useMoviesNowPlaying, useMoviesPopular, useMoviesTopRated, useMoviesUpcoming } from '../service/API'
-import { COLORS } from '../theme/colors'
+import MovieCard from '../../components/MovieCard'
+import { useMoviesNowPlaying, useMoviesPopular, useMoviesTopRated, useMoviesUpcoming } from '../../service/API'
+import { COLORS } from '../../theme/colors'
 
 const MovieList = ({ navigation, route }) => {
     const { title } = route.params
@@ -22,6 +22,7 @@ const MovieList = ({ navigation, route }) => {
 
     const onSelectMovie = (item) => {
         navigation.navigate('MovieDetail', {
+            title: item.title,
             item: item,
         })
     }

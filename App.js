@@ -1,9 +1,12 @@
 import { StyleSheet } from 'react-native';
-import MovieNavigator from './src/navigation/MovieNavigator';
+import TabNavigator from './src/navigation/tab/TabNavigator';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   return (
-    <MovieNavigator />
+    <NavigationContainer>
+      <TabNavigator />
+    </NavigationContainer>
   );
 }
 

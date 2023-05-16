@@ -1,7 +1,7 @@
 import { FlatList, StyleSheet, View } from 'react-native'
 import React from 'react'
-import CategorieCard from '../components/CategorieCard'
-import { COLORS } from '../theme/colors'
+import CategorieCard from '../../components/CategorieCard'
+import { COLORS } from '../../theme/colors'
 
 // const categories = ["En cartelera", "Populares", "Proximamente", "Mejor Valoradas", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 const categories = ["En cartelera", "Populares", "Proximamente", "Mejor Valoradas"]
