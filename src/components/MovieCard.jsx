@@ -35,10 +35,12 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         fontWeight: 'bold',
         fontSize: 18,
+        // position: 'absolute',
     },
     image: {
         height: 250,
         resizeMode: 'center',
         borderRadius: 10,
-    }
+    },
+
 })

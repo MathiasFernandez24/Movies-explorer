@@ -16,7 +16,7 @@ const SearchMovie = ({ navigation }) => {
         year: year
     })
 
-    console.log(list);
+    // console.log(list);
 
 
     const searchSimilarMovies = (input, isForAdult, yearSearch) => {

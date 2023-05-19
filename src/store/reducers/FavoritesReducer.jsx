@@ -5,8 +5,12 @@ const initialState = {
 
 const FavoritesReducer = (state = initialState, action) => {
     switch (action.type) {
+        case "add":
+            return {
+                ...state,
+                message: action.newFav
+            }
         case "cambiar":
-            console.log("----------------------------------------");
             return {
                 ...state,
                 message: action.newMessage

@@ -5,7 +5,7 @@ import { COLORS } from '../../../theme/colors';
 
 const SearchMoviesList = ({ navigation, list }) => {
 
-    console.log(list);
+    // console.log(list);
     const onSelectMovie = (item) => {
         navigation.navigate('MovieDetail', {
             title: item.title,

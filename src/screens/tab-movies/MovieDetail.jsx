@@ -1,19 +1,33 @@
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useState } from 'react'
 import { COLORS } from '../../theme/colors';
 import { useMovieDetail } from '../../service/API';
+import { Octicons } from '@expo/vector-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { addFavMovie, deleteFavMovie } from '../../reduxRTK/slices/FavoriteMoviesSlice';
 
 
 const MovieDetail = ({ route }) => {
     const { item } = route.params
-
+    const dispatch = useDispatch()
+    const favoriteListMovies = useSelector(state => state.favMovies)
     const { detail } = useMovieDetail(item.id)
-    // console.log("----------------------");
-    // console.log(detail);
+    const isFavorite = favoriteListMovies.pelis.find((i) => i.id == item.id)
+
+    const onAddFavorites = () => {
+        console.log(isFavorite);
+        isFavorite ?
+            dispatch(deleteFavMovie(item))
+            :
+            dispatch(addFavMovie(item))
+    }
 
     return (
         <ScrollView style={styles.containerScroll}>
             <Image source={{ uri: item.backdrop_path }} style={styles.image} />
+            <TouchableOpacity style={styles.favoriteButton} onPress={onAddFavorites}>
+                <Octicons name={isFavorite ? "heart-fill" : "heart"} size={32} color="red" />
+            </TouchableOpacity>
             <View style={styles.containerDetail}>
                 <Text style={styles.title}>{item.title}</Text>
                 {detail.tagline && <Text style={styles.textTagline}>"{detail.tagline}"</Text>}
@@ -112,4 +126,10 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '300',
     },
+    favoriteButton: {
+        position: 'absolute',
+        alignSelf: 'flex-end',
+        padding: 5,
+
+    }
 })

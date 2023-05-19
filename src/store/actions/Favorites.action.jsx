@@ -4,3 +4,10 @@ export const changeMessage = (newMensajito) => (
         newMessage: newMensajito
     }
 )
+export const addFav = (newFavi) => (
+    {
+        type: "add",
+        newFav: newFavi,
+        newMessage: newFavi
+    }
+)

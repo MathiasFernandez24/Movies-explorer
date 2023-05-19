@@ -7,7 +7,7 @@ import { COLORS } from '../../theme/colors'
 const categories = ["En cartelera", "Populares", "Proximamente", "Mejor Valoradas", "Trending"]
 
 const MoviesCategories = ({ navigation }) => {
-    console.log(navigation.isFocused());
+    // console.log(navigation.isFocused());
     const onSelectCategorie = (categorie) => {
         navigation.navigate('MoviesList', {
             title: categorie,

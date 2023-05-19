@@ -4,6 +4,7 @@ import { COLORS } from '../../../theme/colors'
 import { Feather } from '@expo/vector-icons';
 import { useDispatch } from 'react-redux';
 import { changeMessage } from '../../../store/actions/Favorites.action';
+import { cambiarNombre } from '../../../reduxRTK/slices/contador';
 
 const SearchInput = ({ search }) => {
     const [input, setInput] = useState("")
@@ -22,11 +23,13 @@ const SearchInput = ({ search }) => {
     const toggleSwitchSlider = () => {
         isSliderEnabled && setYear(null)
         setIsSliderEnabled(prevState => !prevState)
+        // onPressSearch()
     }
     const onPressSearch = () => {
         search(input, isIncludeAdult, year)
         Keyboard.dismiss()
-        dispatch(changeMessage(input))
+        // dispatch(cambiarNombre(input))
+        // dispatch()
     }
     const onPressRestaurar = () => {
         setIsIncludeAdult(false)

@@ -67,6 +67,8 @@ export default TabNavigator
 const styles = StyleSheet.create({
     tabBar: {
         backgroundColor: COLORS.acent,
+        borderTopStartRadius: 5,
+        borderTopEndRadius: 5,
         // height: 250
     },
 })

@@ -80,9 +80,10 @@ const styles = StyleSheet.create({
         height: 40,
     },
     header: {
-        // height: 70,
         backgroundColor: COLORS.tertiary,
-        paddingTop: 30
+        paddingTop: 30,
+        borderBottomStartRadius: 8,
+        borderBottomEndRadius: 8,
     },
     title: {
         marginStart: 20,
