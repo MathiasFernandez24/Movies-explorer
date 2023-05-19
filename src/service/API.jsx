@@ -104,6 +104,60 @@ export const useMoviesTopRated = () => {
     return { list }
 }
 
+export const useMoviesTrending = () => {
+    const [list, setList] = useState([])
+    useEffect(() => {
+        fetch('https://api.themoviedb.org/3/trending/movie/day?language=es-ES', options)
+            .then(response => response.json())
+            .then(response => {
+                const results = response.results.map((i) => {
+                    return {
+                        id: i.id,
+                        title: i.title,
+                        description: i.overview,
+                        poster_path: "https://image.tmdb.org/t/p/w500" + i.poster_path,
+                        backdrop_path: "https://image.tmdb.org/t/p/w500" + i.backdrop_path
+                    }
+                })
+                setList(results)
+            })
+            .catch(err => console.error(err))
+    }, [])
+
+    return { list }
+}
+export const useMoviesSearch = ({ searchInput = "", include_adult, year }) => {
+    const [list, setList] = useState([])
+    // export const useMoviesSearch = () => {
+    // const searchInput = "Batman"
+    // const year = 2021
+    // const include_adult = false
+    const searchQuery = searchInput.replace(" ", "%20")
+    const yearQuery = year ? `&primary_release_year=${year}` : ""
+
+
+    useEffect(() => {
+        // fetch('https://api.themoviedb.org/3/trending/movie/day?language=es-ES', options)
+        fetch(`https://api.themoviedb.org/3/search/movie?query=${searchQuery}&include_adult=${include_adult}&language=es-ES${yearQuery}&page=1`, options)
+            .then(response => response.json())
+            .then(response => {
+                const results = response.results.map((i) => {
+                    return {
+                        id: i.id,
+                        title: i.title,
+                        description: i.overview,
+                        poster_path: "https://image.tmdb.org/t/p/w500" + i.poster_path,
+                        backdrop_path: "https://image.tmdb.org/t/p/w500" + i.backdrop_path
+                    }
+                })
+                setList(results)
+            })
+            .catch(err => console.error(err))
+    }, [searchInput, include_adult, year])
+    console.log("---------");
+    return { list }
+}
+
 export const useMovieDetail = (movieId) => {
     const [detail, setDetail] = useState([])
     useEffect(() => {

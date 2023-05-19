@@ -1,25 +1,26 @@
 import { StyleSheet } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import SearchMovie from '../../screens/tab-search/SearchMovie'
 import MovieNavigator from '../MovieNavigator'
 import { COLORS } from '../../theme/colors'
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import Favorite from '../../screens/tab-favorites/Favorite'
 import Profile from '../../screens/tab-profile/Profile'
+import SearchNavigator from '../SearchNavigator'
 
 const BottomTabs = createBottomTabNavigator()
 
 const TabNavigator = () => {
     return (
+
         <BottomTabs.Navigator
             initialRouteName='MovieNav'
             screenOptions={{
                 headerShown: false,
                 tabBarShowLabel: false,
                 tabBarStyle: styles.tabBar,
+                tabBarHideOnKeyboard: true,
             }}
-
         >
             <BottomTabs.Screen
                 name='MovieNav'
@@ -32,7 +33,7 @@ const TabNavigator = () => {
             />
             <BottomTabs.Screen
                 name='SearchNav'
-                component={SearchMovie}
+                component={SearchNavigator}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <FontAwesome name="search" size={focused ? 36 : 30} color={focused ? COLORS.secondary : COLORS.tertiary} />

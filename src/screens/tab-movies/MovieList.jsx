@@ -1,7 +1,7 @@
 import { FlatList, StyleSheet, View } from 'react-native'
 import React from 'react'
 import MovieCard from '../../components/MovieCard'
-import { useMoviesNowPlaying, useMoviesPopular, useMoviesTopRated, useMoviesUpcoming } from '../../service/API'
+import { useMoviesNowPlaying, useMoviesPopular, useMoviesTopRated, useMoviesTrending, useMoviesUpcoming } from '../../service/API'
 import { COLORS } from '../../theme/colors'
 
 const MovieList = ({ navigation, route }) => {
@@ -16,10 +16,12 @@ const MovieList = ({ navigation, route }) => {
             break;
         case "Mejor Valoradas": var { list } = useMoviesTopRated()
             break;
+        case "Trending": var { list } = useMoviesTrending()
+            break;
         default: console.log("opcion inexistente");
             break;
     }
-
+    console.log(list);
     const onSelectMovie = (item) => {
         navigation.navigate('MovieDetail', {
             title: item.title,

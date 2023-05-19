@@ -4,10 +4,10 @@ import CategorieCard from '../../components/CategorieCard'
 import { COLORS } from '../../theme/colors'
 
 // const categories = ["En cartelera", "Populares", "Proximamente", "Mejor Valoradas", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-const categories = ["En cartelera", "Populares", "Proximamente", "Mejor Valoradas"]
+const categories = ["En cartelera", "Populares", "Proximamente", "Mejor Valoradas", "Trending"]
 
 const MoviesCategories = ({ navigation }) => {
-
+    console.log(navigation.isFocused());
     const onSelectCategorie = (categorie) => {
         navigation.navigate('MoviesList', {
             title: categorie,
