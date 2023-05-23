@@ -154,7 +154,6 @@ export const useMoviesSearch = ({ searchInput = "", include_adult, year }) => {
             })
             .catch(err => console.error(err))
     }, [searchInput, include_adult, year])
-    console.log("---------");
     return { list }
 }
 

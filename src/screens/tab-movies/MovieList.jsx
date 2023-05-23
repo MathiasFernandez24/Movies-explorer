@@ -21,7 +21,7 @@ const MovieList = ({ navigation, route }) => {
         default: console.log("opcion inexistente");
             break;
     }
-    console.log(list);
+    // console.log(list);
     const onSelectMovie = (item) => {
         navigation.navigate('MovieDetail', {
             title: item.title,

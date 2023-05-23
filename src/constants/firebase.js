@@ -1,0 +1,1 @@
+export const DB_URL = 'https://moviesearch-72da9-default-rtdb.firebaseio.com/'

@@ -7,10 +7,13 @@ import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import Favorite from '../../screens/tab-favorites/Favorite'
 import Profile from '../../screens/tab-profile/Profile'
 import SearchNavigator from '../SearchNavigator'
+import { useDispatch } from 'react-redux'
+import { getMoviesFromFirebase } from '../../reduxRTK/slices/FavoriteMoviesSlice'
 
 const BottomTabs = createBottomTabNavigator()
 
 const TabNavigator = () => {
+    const dispatch = useDispatch()
     return (
 
         <BottomTabs.Navigator
@@ -44,9 +47,12 @@ const TabNavigator = () => {
                 name='Favorites'
                 component={Favorite}
                 options={{
-                    tabBarIcon: ({ focused }) => (
-                        <MaterialIcons name="favorite" size={focused ? 36 : 30} color={focused ? COLORS.secondary : COLORS.tertiary} />
-                    )
+                    tabBarIcon: ({ focused }) => {
+                        focused && dispatch(getMoviesFromFirebase())
+                        return (
+                            <MaterialIcons name="favorite" size={focused ? 36 : 30} color={focused ? COLORS.secondary : COLORS.tertiary} />
+                        )
+                    }
                 }}
             />
             <BottomTabs.Screen
@@ -67,8 +73,11 @@ export default TabNavigator
 const styles = StyleSheet.create({
     tabBar: {
         backgroundColor: COLORS.acent,
-        borderTopStartRadius: 5,
-        borderTopEndRadius: 5,
+        // borderTopStartRadius: 5,
+        // borderTopEndRadius: 5,
+        // position: 'absolute',
+        // width: 300,
+        // margin: 10
         // height: 250
     },
 })

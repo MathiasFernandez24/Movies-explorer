@@ -3,7 +3,7 @@ import React from 'react'
 import { COLORS } from '../../../theme/colors'
 import { Octicons } from '@expo/vector-icons';
 import { useDispatch } from 'react-redux';
-import { deleteFavMovie } from '../../../reduxRTK/slices/FavoriteMoviesSlice';
+import { deleteFavMovie, deleteMoviesToFirebase } from '../../../reduxRTK/slices/FavoriteMoviesSlice';
 
 
 const MovieCardFavorite = ({ onSelectMovie, item }) => {
@@ -11,6 +11,7 @@ const MovieCardFavorite = ({ onSelectMovie, item }) => {
 
     const deleteMovie = () => {
         dispatch(deleteFavMovie(item))
+        dispatch(deleteMoviesToFirebase(item))
     }
     return (
         <TouchableOpacity onPress={() => { onSelectMovie(item) }}>

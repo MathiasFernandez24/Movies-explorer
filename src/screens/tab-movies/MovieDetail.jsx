@@ -4,7 +4,7 @@ import { COLORS } from '../../theme/colors';
 import { useMovieDetail } from '../../service/API';
 import { Octicons } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { addFavMovie, deleteFavMovie } from '../../reduxRTK/slices/FavoriteMoviesSlice';
+import { addFavMovie, deleteFavMovie, deleteMoviesToFirebase, sendMoviesToFirebase, updateMovieInFirebase } from '../../reduxRTK/slices/FavoriteMoviesSlice';
 
 
 const MovieDetail = ({ route }) => {
@@ -15,11 +15,18 @@ const MovieDetail = ({ route }) => {
     const isFavorite = favoriteListMovies.pelis.find((i) => i.id == item.id)
 
     const onAddFavorites = () => {
-        console.log(isFavorite);
-        isFavorite ?
+        // console.log(isFavorite);
+        if (isFavorite) {
             dispatch(deleteFavMovie(item))
-            :
+            dispatch(deleteMoviesToFirebase(item))
+            // dispatch(deleteFavMovie(item))
+            // dispatch(deleteFavMovie(item))
+
+        } else {
             dispatch(addFavMovie(item))
+            // dispatch(sendMoviesToFirebase(item))
+            dispatch(updateMovieInFirebase(item))
+        }
     }
 
     return (

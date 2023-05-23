@@ -1,10 +1,11 @@
-import { Keyboard, Slider, StyleSheet, Switch, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
+import { Keyboard, StyleSheet, Switch, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { COLORS } from '../../../theme/colors'
 import { Feather } from '@expo/vector-icons';
 import { useDispatch } from 'react-redux';
 import { changeMessage } from '../../../store/actions/Favorites.action';
 import { cambiarNombre } from '../../../reduxRTK/slices/contador';
+import Slider from '@react-native-community/slider';
 
 const SearchInput = ({ search }) => {
     const [input, setInput] = useState("")
@@ -38,7 +39,6 @@ const SearchInput = ({ search }) => {
         setInput("")
     }
 
-    console.log(year);
     return (
         <View style={styles.container}>
             <View style={styles.inputContainer}>
