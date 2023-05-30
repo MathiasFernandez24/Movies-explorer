@@ -14,8 +14,13 @@ const Favorite = ({ navigation }) => {
     const dispatch = useDispatch()
     const [refreshing, setRefreshing] = useState(false);
 
+    const userID = useSelector(state => state.auth.userId)
+    const userEmail = useSelector(state => state.auth.email)
+    const userEmailName = userEmail.split('@')
+    const userId = userEmailName[0] + "_" + userID
+
     useEffect(() => {
-        dispatch(getMoviesFromFirebase())
+        dispatch(getMoviesFromFirebase(userId))
     }, [])
 
 
@@ -25,7 +30,7 @@ const Favorite = ({ navigation }) => {
         // Simular una solicitud de actualización de datos
         setTimeout(() => {
             // console.log("ACTUALIZACNDO--------------");
-            dispatch(getMoviesFromFirebase())
+            dispatch(getMoviesFromFirebase(userId))
             setRefreshing(false);
         }, 50);
     };
@@ -45,7 +50,7 @@ const Favorite = ({ navigation }) => {
             <View style={styles.container2}>
                 <FlatList
                     data={favoriteListMovies}
-                    renderItem={(i) => <MovieCardFavorite key={i.item.id} onSelectMovie={onSelectMovie} item={i.item} />}
+                    renderItem={(i) => <MovieCardFavorite key={i.item.id} onSelectMovie={onSelectMovie} item={i.item} userId={userId} />}
                     refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
                 />
             </View>

@@ -1,32 +1,3 @@
-// import { createSlice } from "@reduxjs/toolkit";
-
-// const initialState = {
-//     pelis: []
-// }
-
-// const favoriteMovieSlice = createSlice({
-//     name: 'favoriteMovie',
-//     initialState: initialState,
-//     reducers: {
-//         addFavMovie: (state, action) => {
-//             state.pelis = [...state.pelis, action.payload]
-//             console.log("REDUZ", action)
-//             // console.log(state)
-//         },
-//         deleteFavMovie: (state, action) => {
-//             state.pelis = state.pelis.filter((i) => (i.id != action.payload.id))
-//         },
-//     },
-
-
-// })
-
-// export const { addFavMovie, deleteFavMovie } = favoriteMovieSlice.actions
-// const favouriteMovieReducer = favoriteMovieSlice.reducer
-// export default favouriteMovieReducer
-
-// FIREBASE DE ACA HACIA ABAJO, USAR UNO U OTRO
-
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { DB_URL } from "../../constants/firebase";
 
@@ -37,17 +8,17 @@ const initialState = {
     error: false,
 }
 
+
 export const sendMoviesToFirebase = createAsyncThunk(
     'favoriteMovie/sendMoviesToFirebase',
+
     async (item, asyncThunk) => {
         const res = await fetch(
-            `${DB_URL}fav_movies/${item.id}.json`,
+            `${DB_URL}fav_movies/${item.userId}/${item.id}.json`,
             {
                 method: 'POST',
                 body: JSON.stringify({
-                    // fecha: new Date().toLocaleString(),
                     item: item,
-
                 })
             }
         )
@@ -55,11 +26,12 @@ export const sendMoviesToFirebase = createAsyncThunk(
         return data
     }
 )
+
 export const deleteMoviesToFirebase = createAsyncThunk(
     'favoriteMovie/deleteMoviesToFirebase',
     async (item, asyncThunk) => {
         const res = await fetch(
-            `${DB_URL}fav_movies/${item.id}.json`,
+            `${DB_URL}fav_movies/${item.userId}/${item.id}.json`,
             {
                 method: 'DELETE',
             }
@@ -72,7 +44,7 @@ export const deleteMoviesToFirebase = createAsyncThunk(
 export const updateMovieInFirebase = createAsyncThunk(
     'favoriteMovie/updateMovieInFirebase',
     async (item, asyncThunk) => {
-        const res = await fetch(`${DB_URL}fav_movies/${item.id}.json`, {
+        const res = await fetch(`${DB_URL}fav_movies/${item.userId}/${item.id}.json`, {
             method: 'PUT',
             body: JSON.stringify(item),
         });
@@ -83,8 +55,8 @@ export const updateMovieInFirebase = createAsyncThunk(
 
 export const getMoviesFromFirebase = createAsyncThunk(
     'favoriteMovie/getMoviesFromFirebase',
-    async (thunkAPI) => {
-        const res = await fetch(`${DB_URL}fav_movies.json`).then(
+    async (userId, thunkAPI) => {
+        const res = await fetch(`${DB_URL}fav_movies/${userId}.json`).then(
             (data) => data.json()
         )
         const r = Object.values(res).map(i => i) //Convierto el objeto en array para poder hacerle un map y obtener solo el "item"
@@ -104,6 +76,9 @@ const favoriteMovieSlice = createSlice({
         deleteFavMovie: (state, action) => {
             state.pelis = state.pelis.filter((i) => (i.id != action.payload.id))
         },
+        deleteAllFavMovieLocal: (state) => {
+            state.pelis = []
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(getMoviesFromFirebase.fulfilled, (state, action) => {
@@ -140,13 +115,11 @@ const favoriteMovieSlice = createSlice({
         //     state.loading = false
         // }
     }
-
-
 })
 
-export const { addFavMovie, deleteFavMovie } = favoriteMovieSlice.actions
+export const { addFavMovie, deleteFavMovie, deleteAllFavMovieLocal } = favoriteMovieSlice.actions
 
-export const sendReducer = sendMoviesToFirebase.reducer
+// export const sendReducer = sendMoviesToFirebase.reducer
 
 const favouriteMovieReducer = favoriteMovieSlice.reducer
 export default favouriteMovieReducer

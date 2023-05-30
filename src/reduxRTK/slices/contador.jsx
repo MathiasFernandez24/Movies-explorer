@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-
+//ESTE ARCHIVO ES A MODO DE EJEMPLO
 const initialState = {
     valor: 0,
     nombre: "Mathias",

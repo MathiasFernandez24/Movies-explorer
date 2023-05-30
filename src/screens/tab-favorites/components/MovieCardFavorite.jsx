@@ -6,12 +6,12 @@ import { useDispatch } from 'react-redux';
 import { deleteFavMovie, deleteMoviesToFirebase } from '../../../reduxRTK/slices/FavoriteMoviesSlice';
 
 
-const MovieCardFavorite = ({ onSelectMovie, item }) => {
+const MovieCardFavorite = ({ onSelectMovie, item, userId }) => {
     const dispatch = useDispatch()
 
     const deleteMovie = () => {
         dispatch(deleteFavMovie(item))
-        dispatch(deleteMoviesToFirebase(item))
+        dispatch(deleteMoviesToFirebase({ ...item, userId: userId }))
     }
     return (
         <TouchableOpacity onPress={() => { onSelectMovie(item) }}>

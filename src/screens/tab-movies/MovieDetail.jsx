@@ -14,18 +14,23 @@ const MovieDetail = ({ route }) => {
     const { detail } = useMovieDetail(item.id)
     const isFavorite = favoriteListMovies.pelis.find((i) => i.id == item.id)
 
+    const userID = useSelector(state => state.auth.userId)
+    const userEmail = useSelector(state => state.auth.email)
+    const userEmailName = userEmail.split('@')
+    const userId = userEmailName[0] + "_" + userID
+
     const onAddFavorites = () => {
         // console.log(isFavorite);
         if (isFavorite) {
             dispatch(deleteFavMovie(item))
-            dispatch(deleteMoviesToFirebase(item))
+            dispatch(deleteMoviesToFirebase({ ...item, userId: userId }))
             // dispatch(deleteFavMovie(item))
             // dispatch(deleteFavMovie(item))
 
         } else {
             dispatch(addFavMovie(item))
             // dispatch(sendMoviesToFirebase(item))
-            dispatch(updateMovieInFirebase(item))
+            dispatch(updateMovieInFirebase({ ...item, userId: userId }))
         }
     }
 
