@@ -105,11 +105,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        marginTop: 50
+        justifyContent: 'center',
+        marginTop: 50,
+        backgroundColor: COLORS.primary
 
     },
     inputContainer: {
-        width: '80%',
+        width: '85%',
+        // height: 500,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -122,28 +125,28 @@ const styles = StyleSheet.create({
         padding: 10,
         paddingVertical: 30,
         borderRadius: 10,
-        backgroundColor: COLORS.primary
+        backgroundColor: COLORS.secondary
     },
     headerTitle: {
         alignSelf: 'center',
-        fontSize: 25,
+        fontSize: 32,
         fontWeight: 'bold'
     },
-    button: {
-        alignItems: 'center',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 4,
-        },
-        shadowOpacity: 0.32,
-        shadowRadius: 5.46,
-        elevation: 9,
-        width: 30,
-        backgroundColor: COLORS.tertiary,
-        borderRadius: 5,
-        padding: 3,
-    },
+    // button: {
+    //     alignItems: 'center',
+    //     shadowColor: "#000",
+    //     shadowOffset: {
+    //         width: 0,
+    //         height: 4,
+    //     },
+    //     shadowOpacity: 0.32,
+    //     shadowRadius: 5.46,
+    //     elevation: 9,
+    //     width: 30,
+    //     backgroundColor: COLORS.tertiary,
+    //     borderRadius: 5,
+    //     padding: 3,
+    // },
     buttonLog: {
         alignItems: 'center',
         shadowColor: "#000",
@@ -165,12 +168,7 @@ const styles = StyleSheet.create({
     formContainer: {
         marginTop: 20,
     },
-    input: {
-        marginVertical: 5,
-        padding: 5,
-        borderBottomWidth: 1,
-        borderBottomColor: COLORS.acent
-    },
+
     error: {
         color: 'red',
         marginTop: 10,
@@ -178,6 +176,7 @@ const styles = StyleSheet.create({
     registerText: {
         color: 'grey',
         textDecorationLine: 'underline',
-        alignSelf: 'flex-end'
+        alignSelf: 'flex-end',
+        fontSize: 18,
     }
 })

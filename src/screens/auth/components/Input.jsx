@@ -1,7 +1,6 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
 import { Entypo } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
 import { COLORS } from '../../../theme/colors';
 
 const Input = ({ secureTextEntry = false, value, onchangeText, placeholder, error }) => {
@@ -11,7 +10,7 @@ const Input = ({ secureTextEntry = false, value, onchangeText, placeholder, erro
             <View style={styles.container}>
                 <TextInput
                     secureTextEntry={secureTextEntry}
-                    keyboardType='email-address'
+                    keyboardType='default'
                     value={value}
                     onChangeText={onchangeText}
                     placeholder={placeholder}
@@ -46,5 +45,9 @@ const styles = StyleSheet.create({
         flex: 1,
         borderBottomWidth: 1,
         borderBottomColor: COLORS.acent,
+        fontSize: 24,
+        marginVertical: 5,
+        padding: 5,
+        paddingVertical: 10,
     }
 })
